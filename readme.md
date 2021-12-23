@@ -13,7 +13,7 @@ This is just a basic java code compiler which makes use of the core java compile
 
 #### Client-Side
 
-1. Make sure you have Nodejs Installed on yourt PC before running this code. To install nodejs, visit (Nodejs)[https://nodejs.org];
+1. Make sure you have Nodejs Installed on yourt PC before running this code. To install nodejs, visit [Nodejs download](https://nodejs.org);
 2. Download or Clone this repo.
 3. Open up the client folder with visual studio code.
 4. Make sure live server extension is installed
@@ -21,7 +21,7 @@ This is just a basic java code compiler which makes use of the core java compile
 
 #### Server-Side
 
-1. Make sure you have Nodejs Installed on yourt PC before running this code. To install nodejs, visit (Nodejs)[https://nodejs.org];
+1. Make sure you have Nodejs Installed on yourt PC before running this code. To install nodejs, visit [Nodejs download](https://nodejs.org);
 2. Download or Clone this repo.
 3. Open the server folder.
 4. Open up command prompt on windows or mac.
