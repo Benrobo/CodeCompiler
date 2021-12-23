@@ -4,8 +4,10 @@ This is just a basic java code compiler which makes use of the core java compile
 
 ### Technologies
 
-- Frontend - Html, Css, Javascript
-  -Backend - Nodejs, Expresssjs
+- Frontend
+  - Html, Css, Javascript
+- Backend
+  - Nodejs, Expresssjs
 
 ### Running this code.
 
