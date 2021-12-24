@@ -12,7 +12,7 @@
   <body>
     <div class="nav">
       <div class="info box">
-        <input type="checkbox" class="input-check form-group" />
+        <h4>Java Code Compiler</h4>
       </div>
       <div class="run box">
         <button class="run-btn btn">Run Code</button>
@@ -20,7 +20,6 @@
     </div>
     <div class="editor-cont">
       <div class="bx input-cont">
-        <div class="code-count"></div>
         <div class="main">
           <textarea class="code"></textarea>
         </div>
@@ -28,6 +27,19 @@
       <div class="bx output-cont">
         <p>Result ></p>
         <div class="output-code" id="outputcode"></div>
+        <br />
+        <div class="options-cont">
+          <p>Compiler Options</p>
+          <span>Accept Input</span>
+          <input type="checkbox" class="check-input" />
+          <br />
+          <br />
+          <textarea
+            cols="30"
+            rows="10"
+            class="form-control javaInput"
+          ></textarea>
+        </div>
       </div>
     </div>
 

@@ -12,44 +12,87 @@ const getCompiler = () => {
     return new Promise((res, rej) => {
         fs.readdir(dir, (err, data) => {
             err && rej(err)
-            res(data[0])
+            res({ java: data[0], javac: data[1] })
         })
     })
 }
 
-const compileJavaCode = async (code, ext) => {
+const compileJavaCode = async (code, ext, cb) => {
     let { fileDir, fileName } = genSourceFile(code, ext);
 
-    let java = await getCompiler()
+    let { java, javac } = await getCompiler()
     let command = `cd ${path.join(__dirname, "temp")} & ${java} ${fileName}`
 
     // execute the command
-    return new Promise((res, rej) => {
+    let output = {};
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            output["errorMsg"] = `${err}`;
+            output["filename"] = fileName;
+            return cb(output)
+        }
+        else if (stderr) {
+            output["stderr"] = `${stderr}`;
+            output["filepath"] = fileDir;
+            return cb(output)
+        }
+        else {
+            output["output"] = stdout;
+            output["filename"] = fileName;
+            output["filepath"] = fileDir;
+            cb(output)
+        }
+    })
+}
+
+
+const compileJavaCodeWithInput = async (code, ext, input, cb) => {
+    let { fileDir, fileName } = genSourceFile(code, ext);
+    let { java, javac } = await getCompiler()
+
+    // If an input is passed, create a new input.txt file
+    // this would be where the user input would recide
+    // which would then be compiled later on
+
+    let dir = path.join(__dirname, "/temp");
+    let inputFilePath = `${dir}/input.txt`
+
+    // create the file and store the data within it
+    fs.writeFile(inputFilePath, input, (err, result) => {
+        if (err) {
+            throw Error("Error creating input file")
+        }
+
+        // else if everything went well
+        // compile the java file along with the input.txt
+
+        // execute the command
+        // cd ${path.join(__dirname, "temp")} & ${javac} ${fileName} && 
+
+        let command = `cd ${dir} && ${java} Main < input.txt`
         let output = {};
+
         exec(command, (err, stdout, stderr) => {
+            console.log(stdout)
             if (err) {
                 output["errorMsg"] = `${err}`;
                 output["filename"] = fileName;
-                return rej(output)
+                return cb(output)
             }
             else if (stderr) {
                 output["stderr"] = `${stderr}`;
                 output["filepath"] = fileDir;
-                return rej(output)
+                return cb(output)
             }
             else {
                 output["output"] = stdout;
                 output["filename"] = fileName;
                 output["filepath"] = fileDir;
-                res(output)
+                cb(output)
             }
         })
+
     })
-}
-
-
-const compileJavaCodeWithInput = () => {
-
 }
 
 module.exports = {

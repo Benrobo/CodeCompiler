@@ -21,13 +21,22 @@ router.get("/", (req, res) => {
     return res.json({ msg: "dfgbgfhbgf" })
 })
 
-router.post("/compile", async (req, res) => {
+router.post("/compileJava", async (req, res) => {
     let { code, ext } = req.body;
-    const data = await compileJavaCode(code, ext).catch((err) => {
-        return err
-    });
+    // compile normal java codes
+    await compileJavaCode(code, ext, (data) => {
+        res.json(data)
+    })
+})
 
-    res.json(data)
+router.post("/compileJavaInput", async (req, res) => {
+    let { code, ext, input } = req.body;
+    // compile normal java codes
+    await compileJavaCodeWithInput(code, ext, input, (data) => {
+        res.json(data)
+    })
+
+    // compile java codes with input
 })
 
 
